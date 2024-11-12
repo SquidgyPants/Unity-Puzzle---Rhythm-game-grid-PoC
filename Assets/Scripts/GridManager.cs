@@ -39,7 +39,7 @@ public class GridManager : MonoBehaviour
 
     void SpawnPlayer()
     {
-        var spawnPlayer = Instantiate(playerPrefab, new Vector3(8f, 4f), Quaternion.identity);
+        var spawnPlayer = Instantiate(playerPrefab, new Vector3(0f, 8f, 0f), Quaternion.identity);
         spawnPlayer.name = "Player";
         spawnPlayer.Init();
     }

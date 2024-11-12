@@ -114,7 +114,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bpm: 115
   song: {fileID: 7339792915245427015}
-  player: {fileID: 7443834328899768393}
+  countdown: {fileID: 0}
+  player: {fileID: 9198368800895714100}
+  ghost: {fileID: 9115860917294951004, guid: be7f50d891089314c9baeda9dac5327d, type: 3}
+  notes: []
+  nextIndex: 0
+  songPosition: 0
+  songPosInBeats: 0
+  secPerBeat: 0
+  dsptimesong: 0
 --- !u!82 &7339792915245427015
 AudioSource:
   m_ObjectHideFlags: 0
@@ -127,7 +135,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f69d852069f26774f9a994ab75bd74c8, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
