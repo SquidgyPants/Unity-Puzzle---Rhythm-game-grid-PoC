@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderer: {fileID: 3639304541348596147}
+  playerTransform: {fileID: 2190983176551826024}
+  beatManager: {fileID: 8005517605460307475}
 --- !u!114 &8005517605460307475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +125,8 @@ MonoBehaviour:
   songPosInBeats: 0
   secPerBeat: 0
   dsptimesong: 0
+  nextBeatHit: 0
+  prevBeatHit: 0
 --- !u!82 &7339792915245427015
 AudioSource:
   m_ObjectHideFlags: 0
