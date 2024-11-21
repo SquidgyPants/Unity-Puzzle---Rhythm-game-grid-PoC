@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer renderer;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private BeatManager beatManager;
+
+    private float Offset = 0.140f;
     //Add variables for early and late timings
 
     public void Init()
@@ -21,7 +23,7 @@ public class Player : MonoBehaviour
 
     void MovePlayer()
     {
-        if (beatManager.prevBeatHit < 0.140f &&  beatManager.nextBeatHit > 0.940f)
+        if (beatManager.prevBeatHit < Offset &&  beatManager.nextBeatHit > Offset)
         {
             if (Input.GetKeyDown(KeyCode.W) && playerTransform.position.y < 8)
             { playerTransform.Translate(0f, 1f, 0); }

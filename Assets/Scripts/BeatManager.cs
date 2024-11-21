@@ -15,7 +15,6 @@ public class BeatManager : MonoBehaviour
     //the index of the next note to be spawned
     [SerializeField] int nextIndex = 0;
 
-    [SerializeField]
     //the current position of the song (in seconds)
     public float songPosition,
         //the current position of the song (in beats)
@@ -30,8 +29,7 @@ public class BeatManager : MonoBehaviour
     bool isReady = false;
     bool hadStarted = false;
     private float elapsedTime = 0f;
-    float ghostPositionIndex = 0;
-    Vector3[] ghostTargetPosition = new Vector3[3];
+    
 
     // Start is called before the first frame update
     void Start()
@@ -73,47 +71,16 @@ public class BeatManager : MonoBehaviour
             songPosInBeats = songPosition / secPerBeat;
             prevBeatHit = songPosInBeats % 1;
             nextBeatHit = 1 - prevBeatHit;
-            Debug.Log(prevBeatHit);
-            Debug.Log(nextBeatHit);
-            //if (songPosInBeats % 1 == 0)
-            //{
-            //    MoveGhost();
-            //    ghostPositionIndex++;
-            //}
+            
         }
     }
 
-    //public void MoveGhost()
-    //{
-    //    if (ghostPositionIndex > 2)
-    //    {
-    //        switch (ghostPositionIndex % 3)
-    //        {
-    //            case 0:
-    //                ghostTargetPosition[0] = player.transform.position;
-    //                break;
-    //            case 1:
-    //                ghostTargetPosition[1] = player.transform.position;
-    //                break;
-    //            case 2:
-    //                ghostTargetPosition[2] = player.transform.position;
-    //                break;
-    //        }
-    //    }
-    //}
+   
 
     void StartSong()
     {
         song.Play();
     }
-
-    //void SpawnGhost()
-    //{
-
-    //    ghost.transform.position = new Vector3(0f, 8f, 0f);
-    //}
-
-
 
 
     //void CountdownEvent()
