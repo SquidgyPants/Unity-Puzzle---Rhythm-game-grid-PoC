@@ -59,7 +59,7 @@ public class BeatManager : MonoBehaviour
             //songPosition = song.time;
             songPositionInTicks = (float)(AudioSettings.dspTime - dsptimesong);
             //calculate the position in seconds
-            songPosition = songPositionInTicks / sampleRate;
+            songPosition = songPositionInTicks * sampleRate;
             if (!hadStarted)
             {
                 //Add hihat in song
