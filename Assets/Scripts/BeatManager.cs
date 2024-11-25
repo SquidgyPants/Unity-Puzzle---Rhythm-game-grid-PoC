@@ -33,6 +33,7 @@ public class BeatManager : MonoBehaviour
     bool hadStarted = false;
     private float sampleRate = 1f / 48000f;
     private float elapsedTime = 0f;
+    private float songOffset = 0.034f;
 
 
     // Start is called before the first frame update
@@ -58,7 +59,7 @@ public class BeatManager : MonoBehaviour
             //songPosition = song.time;
             songPositionInTicks = (float)(AudioSettings.dspTime - dsptimesong);
             //calculate the position in seconds
-            songPosition = songPositionInTicks * sampleRate;
+            songPosition = songPositionInTicks / sampleRate;
             if (!hadStarted)
             {
                 //Add hihat in song
@@ -68,9 +69,9 @@ public class BeatManager : MonoBehaviour
                 songPosition = 0;
                 songPosInBeats = 0;
             }
-            //calculate the position in beats
-            songPosInBeats = songPosition / secPerBeat;
-            Debug.Log($"songPosInBeats: {songPosInBeats}");
+            Debug.Log(songPosition);
+            songPosInBeats = songPosition / secPerBeat - songOffset;
+//            Debug.Log($"songPosInBeats: {songPosInBeats}");
             prevBeatHit = songPosInBeats % 1;
             nextBeatHit = 1 - prevBeatHit;
             if (prevBeatHit < 0.1f && nextBeatHit < 0.1f)
