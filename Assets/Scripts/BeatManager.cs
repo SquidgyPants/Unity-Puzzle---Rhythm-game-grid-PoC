@@ -21,7 +21,9 @@ public class BeatManager : MonoBehaviour
         songPosInBeats = 0,
         //the duration of a beat
         secPerBeat,
-        //how much time (in seconds) has passed since the song started
+        //song position in ticks
+        songPositionInTicks,
+        //how many ticks have passed since the song started
         dsptimesong,
         nextBeatHit,
         prevBeatHit,
@@ -29,12 +31,14 @@ public class BeatManager : MonoBehaviour
 
     bool isReady = false;
     bool hadStarted = false;
+    private float sampleRate = 1f / 48000f;
     private float elapsedTime = 0f;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        //calculate how many seconds is one beat
         secPerBeat = 60f / bpm;
     }
 
@@ -44,49 +48,26 @@ public class BeatManager : MonoBehaviour
         if (!isReady)
         {
             elapsedTime += Time.deltaTime;
-            Debug.Log(elapsedTime);
             if (elapsedTime >= 2f)
             {
                 isReady = true;
             }
         }
-
-//        if (isReady)
-//            {
-//                if (!hadStarted)
-//                {
-//                    StartSong();
-//                    hadStarted = true;
-//                    songPosition = 0;
-//                    songPosInBeats = 0;
-//                }
-//
-//                songPosition = (float)(AudioSettings.dspTime) - dsptimesong;
-//                songPosInBeats = songPosition / secPerBeat;
-//                Debug.Log($"songPosInBeats: {songPosInBeats}");
-//                prevBeatHit = songPosInBeats % 1;
-//                nextBeatHit = 1 - prevBeatHit;
-//                Debug.Log($"prevBeatHit: {prevBeatHit}, nextBeatHit: {nextBeatHit}");
-//            }
         if (isReady)
         {
-            songPosition = song.time;
-//            songPosition = (float)(AudioSettings.dspTime) - dsptimesong;
+            //songPosition = song.time;
+            songPositionInTicks = (float)(AudioSettings.dspTime - dsptimesong);
+            //calculate the position in seconds
+            songPosition = songPositionInTicks * sampleRate;
             if (!hadStarted)
             {
-                //calculate how many seconds is one beat
-                //we will see the declaration of bpm later
-
                 //Add hihat in song
                 StartSong();
-                //record the time when the song starts
+
                 hadStarted = true;
                 songPosition = 0;
                 songPosInBeats = 0;
             }
-            //calculate the position in seconds
-
-
             //calculate the position in beats
             songPosInBeats = songPosition / secPerBeat;
             Debug.Log($"songPosInBeats: {songPosInBeats}");
@@ -105,10 +86,22 @@ public class BeatManager : MonoBehaviour
     {
         if (song != null)
         {
-//            dsptimesong = (float)AudioSettings.dspTime;
+            dsptimesong = (float)AudioSettings.dspTime;
             song.Play();
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     //void CountdownEvent()

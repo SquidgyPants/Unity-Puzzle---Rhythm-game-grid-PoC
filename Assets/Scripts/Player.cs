@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private BeatManager beatManager;
 
-    private float Offset = 0.200f;
+    private float Offset = 0.100f;
 
     public void Start()
     {
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
     void MovePlayer()
     {
-        if (beatManager.prevBeatHit < Offset && beatManager.nextBeatHit > Offset)
+        if (beatManager.prevBeatHit < Offset || beatManager.nextBeatHit < Offset)
         {
             if (Input.GetKeyDown(KeyCode.W) && playerTransform.position.y < 8)
             {
