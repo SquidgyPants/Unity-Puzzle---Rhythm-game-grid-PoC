@@ -57,7 +57,7 @@ public class BeatManager : MonoBehaviour
         {
             //songPosition = song.time;
             //calculate the song position in seconds
-            songPosition = (float)(AudioSettings.dspTime - dsptimesong);
+            songPosition = (float)(AudioSettings.dspTime - dsptimesong) - songOffset;
             if (!hadStarted)
             {
                 //Add hihat in song
@@ -68,8 +68,8 @@ public class BeatManager : MonoBehaviour
                 songPosInBeats = 0;
             }
 //            Debug.Log(songPosition);
-            songPosInBeats = songPosition / secPerBeat - songOffset;
-            Debug.Log($"songPosInBeats: {songPosInBeats}");
+            songPosInBeats = songPosition / secPerBeat;
+            //Debug.Log($"songPosInBeats: {songPosInBeats}");
             prevBeatHit = songPosInBeats % 1;
             nextBeatHit = 1 - prevBeatHit;
 //            playerScript.MovePlayer(prevBeatHit, nextBeatHit);
