@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private BeatManager beatManager;
 
-    private float Offset = 0.100f;
+    private float Offset = 0.150f;
 
     public void Start()
     {
@@ -17,13 +17,18 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
-        MovePlayer();
+//        var watch = System.Diagnostics.Stopwatch.StartNew();
+//        MovePlayer();
+//        watch.Stop();
+//        float elapsedMs = watch.ElapsedMilliseconds;
+//        Debug.Log(elapsedMs);
     }
 
-    void MovePlayer()
+    public void MovePlayer(float prevBeatHit, float nextBeatHit)
     {
-        if (beatManager.prevBeatHit < Offset || beatManager.nextBeatHit < Offset)
+        if (prevBeatHit < Offset || nextBeatHit < Offset)
         {
+            renderer.color = Color.green;
             if (Input.GetKeyDown(KeyCode.W) && playerTransform.position.y < 8)
             {
                 playerTransform.Translate(0f, 1f, 0);
@@ -45,5 +50,6 @@ public class Player : MonoBehaviour
                 Debug.Log($"Song position in beats: {beatManager.songPosInBeats}, Song position in seconds:  {beatManager.songPosition}");
             }
         }
+        renderer.color = Color.red;
     }
 }

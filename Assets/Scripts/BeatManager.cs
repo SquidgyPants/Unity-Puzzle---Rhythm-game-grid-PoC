@@ -9,6 +9,7 @@ public class BeatManager : MonoBehaviour
     [SerializeField] private float bpm;
     [SerializeField] private AudioSource song;
     [SerializeField] public TextMeshProUGUI countdown;
+    [SerializeField] public Player playerScript;
 
     //keep all the position-in-beats of notes in the song
     [SerializeField] float[] notes;
@@ -21,8 +22,6 @@ public class BeatManager : MonoBehaviour
         songPosInBeats = 0,
         //the duration of a beat
         secPerBeat,
-        //song position in ticks
-        songPositionInTicks,
         //how many ticks have passed since the song started
         dsptimesong,
         nextBeatHit,
@@ -31,9 +30,9 @@ public class BeatManager : MonoBehaviour
 
     bool isReady = false;
     bool hadStarted = false;
-    private float sampleRate = 1f / 48000f;
+    bool hasBeatTriggered = false;
     private float elapsedTime = 0f;
-    private float songOffset = 0.034f;
+    private float songOffset = 0.284f;
 
 
     // Start is called before the first frame update
@@ -57,9 +56,8 @@ public class BeatManager : MonoBehaviour
         if (isReady)
         {
             //songPosition = song.time;
-            songPositionInTicks = (float)(AudioSettings.dspTime - dsptimesong);
-            //calculate the position in seconds
-            songPosition = songPositionInTicks * sampleRate;
+            //calculate the song position in seconds
+            songPosition = (float)(AudioSettings.dspTime - dsptimesong);
             if (!hadStarted)
             {
                 //Add hihat in song
@@ -69,14 +67,24 @@ public class BeatManager : MonoBehaviour
                 songPosition = 0;
                 songPosInBeats = 0;
             }
-            Debug.Log(songPosition);
+//            Debug.Log(songPosition);
             songPosInBeats = songPosition / secPerBeat - songOffset;
 //            Debug.Log($"songPosInBeats: {songPosInBeats}");
             prevBeatHit = songPosInBeats % 1;
             nextBeatHit = 1 - prevBeatHit;
-            if (prevBeatHit < 0.1f && nextBeatHit < 0.1f)
+            playerScript.MovePlayer(prevBeatHit, nextBeatHit);
+            if (prevBeatHit < 0.05f || nextBeatHit < 0.05f)
             {
-                Debug.Log("Beat");
+                if (!hasBeatTriggered)
+                {
+                    hasBeatTriggered = true;
+                    Debug.Log("Beat");
+                    Debug.Log($"songPosInBeats: {songPosInBeats}");
+                }
+            }
+            else
+            {
+                hasBeatTriggered = false;
             }
         }
     }
