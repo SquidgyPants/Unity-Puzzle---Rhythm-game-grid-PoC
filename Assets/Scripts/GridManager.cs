@@ -9,14 +9,11 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Tile tilePrefab;
     [SerializeField] private Transform camera;
 
-    [SerializeField] private Player playerPrefab;
-
 
     // Start is called before the first frame update
     void Start()
     {
         GenerateGrid();
-        SpawnPlayer();
     }
 
     void GenerateGrid()
@@ -35,12 +32,5 @@ public class GridManager : MonoBehaviour
 
 
         camera.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
-    }
-
-    void SpawnPlayer()
-    {
-        var spawnPlayer = Instantiate(playerPrefab, new Vector3(8f, 4f), Quaternion.identity);
-        spawnPlayer.name = "Player";
-        spawnPlayer.Init();
     }
 }
