@@ -18,15 +18,15 @@ public class Player : MonoBehaviour
     public void Update()
     {
 //        var watch = System.Diagnostics.Stopwatch.StartNew();
-//        MovePlayer();
+        MovePlayer();
 //        watch.Stop();
 //        float elapsedMs = watch.ElapsedMilliseconds;
 //        Debug.Log(elapsedMs);
     }
 
-    public void MovePlayer(float prevBeatHit, float nextBeatHit)
+    public void MovePlayer(/*float prevBeatHit, float nextBeatHit*/)
     {
-        if (prevBeatHit < Offset || nextBeatHit < Offset)
+        if (beatManager.songPosInBeats % 1 < Offset || 1 - (beatManager.songPosInBeats % 1) < Offset)
         {
             renderer.color = Color.green;
             if (Input.GetKeyDown(KeyCode.W) && playerTransform.position.y < 8)
@@ -51,5 +51,6 @@ public class Player : MonoBehaviour
             }
         }
         renderer.color = Color.red;
+//        yield return new WaitForSeconds(0f);
     }
 }

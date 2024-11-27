@@ -69,17 +69,17 @@ public class BeatManager : MonoBehaviour
             }
 //            Debug.Log(songPosition);
             songPosInBeats = songPosition / secPerBeat - songOffset;
-//            Debug.Log($"songPosInBeats: {songPosInBeats}");
+            Debug.Log($"songPosInBeats: {songPosInBeats}");
             prevBeatHit = songPosInBeats % 1;
             nextBeatHit = 1 - prevBeatHit;
-            playerScript.MovePlayer(prevBeatHit, nextBeatHit);
+//            playerScript.MovePlayer(prevBeatHit, nextBeatHit);
             if (prevBeatHit < 0.05f || nextBeatHit < 0.05f)
             {
                 if (!hasBeatTriggered)
                 {
                     hasBeatTriggered = true;
                     Debug.Log("Beat");
-                    Debug.Log($"songPosInBeats: {songPosInBeats}");
+//                    Debug.Log($"songPosInBeats: {songPosInBeats}");
                 }
             }
             else
@@ -88,8 +88,6 @@ public class BeatManager : MonoBehaviour
             }
         }
     }
-
-
 
     void StartSong()
     {
