@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private BeatManager beatManager;
 
     private float Offset = 0.150f;
+    private float keyCount = 0f;
 
     public void Start()
     {
@@ -52,5 +53,11 @@ public class Player : MonoBehaviour
         }
         renderer.color = Color.red;
 //        yield return new WaitForSeconds(0f);
+    }
+
+    public void KeyPickedUp()
+    {
+        keyCount++;
+        Debug.Log($"Key count: {keyCount}");
     }
 }
