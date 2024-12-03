@@ -45,25 +45,25 @@ public class BeatManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isReady)
-        {
-            elapsedTime += Time.deltaTime;
-            if (elapsedTime >= 2f)
-            {
-                isReady = true;
-            }
-        }
-        if (isReady)
-        {
+        //if (!isReady)
+        //{
+        //    elapsedTime += Time.deltaTime;
+        //    if (elapsedTime >= 2f)
+        //    {
+        //        isReady = true;
+        //    }
+        //}
+        //if (isReady)
+        //{
             //songPosition = song.time;
             //calculate the song position in seconds
             songPosition = (float)(AudioSettings.dspTime - dsptimesong) - songOffset;
             if (!hadStarted)
             {
                 //Add hihat in song
-                StartSong();
+                //StartSong();
 
-                hadStarted = true;
+                //hadStarted = true;
                 songPosition = 0;
                 songPosInBeats = 0;
             }
@@ -73,26 +73,14 @@ public class BeatManager : MonoBehaviour
             prevBeatHit = songPosInBeats % 1;
             nextBeatHit = 1 - prevBeatHit;
 //            playerScript.MovePlayer(prevBeatHit, nextBeatHit);
-            if (prevBeatHit < 0.05f || nextBeatHit < 0.05f)
-            {
-                if (!hasBeatTriggered)
-                {
-                    hasBeatTriggered = true;
-                    Debug.Log("Beat");
-//                    Debug.Log($"songPosInBeats: {songPosInBeats}");
-                }
-            }
-            else
-            {
-                hasBeatTriggered = false;
-            }
-        }
+        //}
     }
 
-    void StartSong()
+    public void StartSong()
     {
         if (song != null)
         {
+            hadStarted = true;
             dsptimesong = (float)AudioSettings.dspTime;
             song.Play();
         }
