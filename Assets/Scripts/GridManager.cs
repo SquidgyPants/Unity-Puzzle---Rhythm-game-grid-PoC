@@ -13,11 +13,12 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Player playerScript;
     [SerializeField] private Key keyScript;
     [SerializeField] private Door doorScript;
-    [SerializeField] private UnityEvent startSong;
+//    [SerializeField] private UnityEvent startSong;
 
     private Vector3 keyPosition;
     private Vector3 previousKeyPosition;
     private float elapsedTime;
+    private bool songStarted = false;
 
 
     // Start is called before the first frame update
@@ -25,13 +26,18 @@ public class GridManager : MonoBehaviour
     {
         GenerateGrid();
         SpawnPlayer();
-        elapsedTime += Time.deltaTime;
-        if (elapsedTime >= 2f)
-        {
-            startSong.Invoke();
-        }
         SpawnKeys();
         SpawnDoor();
+    }
+
+    void Update()
+    {
+//        elapsedTime += Time.deltaTime;
+//        if (elapsedTime >= 2f && !songStarted)
+//        {
+//            startSong.Invoke();
+//            songStarted = true;
+//        }
     }
 
     void GenerateGrid()
@@ -55,7 +61,7 @@ public class GridManager : MonoBehaviour
     {
         var spawnPlayer = Instantiate(playerScript, new Vector3(0f, 8f, 0f), Quaternion.identity);
         spawnPlayer.name = "Player";
-        spawnPlayer.transform.parent = gridManager.transform;
+//        spawnPlayer.transform.parent = gridManager.transform;
         spawnPlayer.Init();
     }
 
@@ -70,7 +76,7 @@ public class GridManager : MonoBehaviour
             }
             var spawnKey = Instantiate(keyScript, keyPosition, Quaternion.identity);
             spawnKey.name = "Key " + (i + 1);
-            spawnKey.transform.parent = gridManager.transform;
+//            spawnKey.transform.parent = gridManager.transform;
             spawnKey.Init();
             previousKeyPosition = keyPosition;
         }
@@ -79,7 +85,7 @@ public class GridManager : MonoBehaviour
     void SpawnDoor()
     {
         var spawnDoor = Instantiate(doorScript, new Vector3(15f, 0f, 0f), Quaternion.identity);
-        spawnDoor.transform.parent = gridManager.transform;
+//        spawnDoor.transform.parent = gridManager.transform;
         spawnDoor.name = "Door";
         spawnDoor.Init();
     }
