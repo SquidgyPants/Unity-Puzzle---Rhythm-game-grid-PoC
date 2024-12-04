@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -3608539198033220468}
   - component: {fileID: 8211150935640287288}
   - component: {fileID: 1767028073826867019}
-  m_Layer: 1
+  m_Layer: 6
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6578062315541829369}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

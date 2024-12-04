@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3771278804865318154}
   - component: {fileID: 7404371384943932293}
   - component: {fileID: -8154208298871255106}
-  m_Layer: 1
+  m_Layer: 7
   m_Name: Ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,5 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 2190983176551826024, guid: 7b2c6691ce01279458eecf447cd738dc, type: 3}
   ghostTransform: {fileID: 3771278804865318154}
-  beatManager: {fileID: 9030853135403197326, guid: f8a15edd88b30924ca745562bf2e5aa1, type: 3}
+  beatManager: {fileID: 452706853547898237, guid: f8a15edd88b30924ca745562bf2e5aa1, type: 3}
   followDistance: 3

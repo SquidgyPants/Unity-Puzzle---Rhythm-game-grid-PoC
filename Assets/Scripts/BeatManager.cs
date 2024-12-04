@@ -61,11 +61,8 @@ public class BeatManager : MonoBehaviour
             if (!hadStarted)
             {
                 //Add hihat in song
-                if (!songStarted)
-                                {
-                                    StartSong();
-                                    songStarted = true;
-                                }
+                dsptimesong = (float)AudioSettings.dspTime;
+                song.Play();
                 hadStarted = true;
                 songPosition = 0;
                 songPosInBeats = 0;
@@ -82,8 +79,8 @@ public class BeatManager : MonoBehaviour
     {
         if (song != null)
         {
-            dsptimesong = (float)AudioSettings.dspTime;
-            song.Play();
+            //dsptimesong = (float)AudioSettings.dspTime;
+            //song.PlayOneShot(clip);
         }
     }
 

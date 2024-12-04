@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
@@ -8,17 +9,23 @@ public class GridManager : MonoBehaviour
 {
     [SerializeField] private int width, height;
     [SerializeField] private Tile tilePrefab;
-    [SerializeField] private GameObject gridManager;
+    //[SerializeField] private GameObject gridManager;
     [SerializeField] private Transform camera;
     [SerializeField] private Player playerScript;
     [SerializeField] private Key keyScript;
     [SerializeField] private Door doorScript;
+
+    [SerializeField] private UnityEvent generateGrid;
 //    [SerializeField] private UnityEvent startSong;
 
     private Vector3 keyPosition;
     private Vector3 previousKeyPosition;
     private float elapsedTime;
     private bool songStarted = false;
+    Door spawnDoor;
+    Key spawnedKey;
+    Player spawnedPlayer;
+
 
 
     // Start is called before the first frame update
@@ -26,8 +33,8 @@ public class GridManager : MonoBehaviour
     {
         GenerateGrid();
         SpawnPlayer();
-        SpawnKeys();
         SpawnDoor();
+        SpawnKeys();
     }
 
     void Update()
@@ -40,7 +47,7 @@ public class GridManager : MonoBehaviour
 //        }
     }
 
-    void GenerateGrid()
+    public void GenerateGrid()
     {
         for (int i = 0; i < width; i++)
         {
@@ -57,15 +64,16 @@ public class GridManager : MonoBehaviour
 
         camera.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
     }
-    void SpawnPlayer()
+    public void SpawnPlayer()
     {
         var spawnPlayer = Instantiate(playerScript, new Vector3(0f, 8f, 0f), Quaternion.identity);
         spawnPlayer.name = "Player";
-//        spawnPlayer.transform.parent = gridManager.transform;
+        spawnPlayer.beatManager = FindObjectOfType<BeatManager>();
+        //        spawnPlayer.transform.parent = gridManager.transform;
         spawnPlayer.Init();
     }
 
-    void SpawnKeys()
+    public void SpawnKeys()
     {
         for (int i = 0; i >= doorScript.keysNeeded; i++)
         {
@@ -74,19 +82,20 @@ public class GridManager : MonoBehaviour
             {
                 keyPosition = new Vector3(Random.Range(1, 15), Random.Range(1, 8), 0f);
             }
-            var spawnKey = Instantiate(keyScript, keyPosition, Quaternion.identity);
-            spawnKey.name = "Key " + (i + 1);
+            spawnedKey = Instantiate(keyScript, keyPosition, Quaternion.identity);
+            spawnedKey.name = "Key " + (i + 1);
 //            spawnKey.transform.parent = gridManager.transform;
-            spawnKey.Init();
+            spawnedKey.Init();
             previousKeyPosition = keyPosition;
         }
     }
 
-    void SpawnDoor()
+    public void SpawnDoor()
     {
-        var spawnDoor = Instantiate(doorScript, new Vector3(15f, 0f, 0f), Quaternion.identity);
+        spawnDoor = Instantiate(doorScript, new Vector3(15f, 0f, 0f), Quaternion.identity);
 //        spawnDoor.transform.parent = gridManager.transform;
         spawnDoor.name = "Door";
+        spawnDoor.playerScript = spawnedPlayer;
         spawnDoor.Init();
     }
 }
