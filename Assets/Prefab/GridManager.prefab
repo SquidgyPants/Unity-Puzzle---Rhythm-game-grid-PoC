@@ -50,60 +50,11 @@ MonoBehaviour:
   height: 9
   tilePrefab: {fileID: 5495818406960467129, guid: 5df9b57793ab36a4d8850034022c0946, type: 3}
   camera: {fileID: 0}
-  playerScript: {fileID: 9198368800895714100, guid: 7b2c6691ce01279458eecf447cd738dc, type: 3}
-  keyScript: {fileID: -3608539198033220468, guid: 1acf55485cb3bc940a520a32d51e9f3e, type: 3}
-  doorScript: {fileID: 4211092745432419961, guid: def06759546204c40b9d650cc6026f1e, type: 3}
-  generateGrid:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6795686065904787606}
-        m_TargetAssemblyTypeName: GridManager, Assembly-CSharp
-        m_MethodName: GenerateGrid
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6795686065904787606}
-        m_TargetAssemblyTypeName: GridManager, Assembly-CSharp
-        m_MethodName: SpawnDoor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6795686065904787606}
-        m_TargetAssemblyTypeName: GridManager, Assembly-CSharp
-        m_MethodName: SpawnPlayer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6795686065904787606}
-        m_TargetAssemblyTypeName: GridManager, Assembly-CSharp
-        m_MethodName: SpawnKeys
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  playerPrefab: {fileID: 9198368800895714100, guid: 7b2c6691ce01279458eecf447cd738dc, type: 3}
+  keyPrefab: {fileID: -3608539198033220468, guid: 1acf55485cb3bc940a520a32d51e9f3e, type: 3}
+  doorPrefab: {fileID: 8683458272219968410, guid: 7e7675d90569a294ba20aa9f84a37790, type: 3}
+  openDoorPrefab: {fileID: -35171772923903766, guid: 58055206daacf894c9b80f06f6237bd7, type: 3}
+  closedDoorPrefab: {fileID: 4211092745432419961, guid: def06759546204c40b9d650cc6026f1e, type: 3}
 --- !u!114 &452706853547898237
 MonoBehaviour:
   m_ObjectHideFlags: 0

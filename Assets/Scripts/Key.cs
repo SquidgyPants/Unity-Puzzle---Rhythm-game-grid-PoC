@@ -14,10 +14,18 @@ public class Key : MonoBehaviour
         keySprite.enabled = true;
     }
 
+    void Update()
+    {
+
+    }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && collision.IsTouching(keyCollider))
         {
+            Debug.Log("You picked up a key!");
+            keySprite.enabled = false;
+            keyCollider.enabled = false;
             keyPickup.Invoke();
         }
     }

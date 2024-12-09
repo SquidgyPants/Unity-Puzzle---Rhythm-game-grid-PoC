@@ -11,17 +11,21 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Tile tilePrefab;
     //[SerializeField] private GameObject gridManager;
     [SerializeField] private Transform camera;
-    [SerializeField] private Player playerScript;
-    [SerializeField] private Key keyScript;
-    [SerializeField] private Door doorScript;
+    [SerializeField] private Player playerPrefab;
+    [SerializeField] private Key keyPrefab;
+    [SerializeField] private Door doorPrefab;
+    [SerializeField] private Door openDoorPrefab;
+    [SerializeField] private Door closedDoorPrefab;
 
-    [SerializeField] private UnityEvent generateGrid;
+//    [SerializeField] private UnityEvent generateGrid;
 //    [SerializeField] private UnityEvent startSong;
 
     private Vector3 keyPosition;
     private Vector3 previousKeyPosition;
     private float elapsedTime;
     private bool songStarted = false;
+    Door closedDoor;
+    Door openDoor;
     Door spawnDoor;
     Key spawnedKey;
     Player spawnedPlayer;
@@ -34,6 +38,8 @@ public class GridManager : MonoBehaviour
         GenerateGrid();
         SpawnPlayer();
         SpawnDoor();
+//        SpawnClosedDoor();
+//        SpawnOpenDoor();
         SpawnKeys();
     }
 
@@ -64,27 +70,26 @@ public class GridManager : MonoBehaviour
 
         camera.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
     }
+
     public void SpawnPlayer()
     {
-        var spawnPlayer = Instantiate(playerScript, new Vector3(0f, 8f, 0f), Quaternion.identity);
-        spawnPlayer.name = "Player";
-        spawnPlayer.beatManager = FindObjectOfType<BeatManager>();
-        //        spawnPlayer.transform.parent = gridManager.transform;
-        spawnPlayer.Init();
+        spawnedPlayer = Instantiate(playerPrefab, new Vector3(0f, 8f, 0f), Quaternion.identity);
+        spawnedPlayer.name = "Player";
+        spawnedPlayer.beatManager = FindObjectOfType<BeatManager>();
+        spawnedPlayer.Init();
     }
 
     public void SpawnKeys()
     {
-        for (int i = 0; i >= doorScript.keysNeeded; i++)
+        for (int i = 0; i < spawnDoor.keysNeeded; i++)
         {
             keyPosition = new Vector3(Random.Range(1, 15), Random.Range(1, 8), 0f);
             while (keyPosition == previousKeyPosition)
             {
                 keyPosition = new Vector3(Random.Range(1, 15), Random.Range(1, 8), 0f);
             }
-            spawnedKey = Instantiate(keyScript, keyPosition, Quaternion.identity);
+            spawnedKey = Instantiate(keyPrefab, keyPosition, Quaternion.identity);
             spawnedKey.name = "Key " + (i + 1);
-//            spawnKey.transform.parent = gridManager.transform;
             spawnedKey.Init();
             previousKeyPosition = keyPosition;
         }
@@ -92,10 +97,29 @@ public class GridManager : MonoBehaviour
 
     public void SpawnDoor()
     {
-        spawnDoor = Instantiate(doorScript, new Vector3(15f, 0f, 0f), Quaternion.identity);
-//        spawnDoor.transform.parent = gridManager.transform;
+        spawnDoor = Instantiate(doorPrefab, new Vector3(15f, 0f, 0f), Quaternion.identity);
+    //  spawnDoor.transform.parent = gridManager.transform;
         spawnDoor.name = "Door";
-        spawnDoor.playerScript = spawnedPlayer;
+//        spawnDoor.closedDoor = closedDoorPrefab;
+//        spawnDoor.openDoor = openDoorPrefab;
         spawnDoor.Init();
     }
+
+//    public void SpawnClosedDoor()
+//    {
+//        closedDoor = Instantiate(closedDoorPrefab, new Vector3(15f, 0f, 0f), Quaternion.identity);
+////        spawnDoor.transform.parent = gridManager.transform;
+//        closedDoor.name = "Closed Door";
+//        closedDoor.playerScript = spawnedPlayer;
+//        closedDoor.Init();
+//    }
+//
+//    public void SpawnOpenDoor()
+//    {
+//        openDoor = Instantiate(openDoorPrefab, new Vector3(15f, 0f, 0f), Quaternion.identity);
+//    //  spawnDoor.transform.parent = gridManager.transform;
+//        openDoor.name = "Closed Door";
+//        openDoor.playerScript = spawnedPlayer;
+//        openDoor.Init();
+//    }
 }

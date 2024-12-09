@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6603975901190564420}
   - component: {fileID: -3608539198033220468}
   - component: {fileID: 8211150935640287288}
-  - component: {fileID: 1767028073826867019}
   m_Layer: 6
   m_Name: Key
   m_TagString: Untagged
@@ -145,7 +144,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.017959356, y: -0.0000009536743}
@@ -161,20 +160,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.970821, y: 4.5128536}
   m_EdgeRadius: 0
---- !u!114 &1767028073826867019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6578062315541829369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eb85266205dd7447a26836ff7c13c70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyCollider: {fileID: 0}
-  keySprite: {fileID: 0}
-  keyPickup:
-    m_PersistentCalls:
-      m_Calls: []

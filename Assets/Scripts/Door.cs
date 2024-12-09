@@ -10,24 +10,39 @@ public class Door : MonoBehaviour
     [SerializeField] private SpriteRenderer closedDoor;
 
     private float keyCount;
+    private bool doorsOpened = false;
 
     public void Init()
     {
-        openDoor.enabled = true;
+        closedDoor.enabled = true;
     }
     
     private void Update()
     {
         keyCount = playerScript.keyCount;
+        if (keyCount == keysNeeded)
+        {
+            Open();
+        }
     }
 
 
     public void Open()
     {
-        if (keyCount == keysNeeded)
-        {
+         if (!doorsOpened)
+         {
             closedDoor.enabled = false;
             openDoor.enabled = true;
-        }
+            doorsOpened = true;
+         }
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Player") && !closedDoor.enabled && openDoor.enabled)
+            {
+                Debug.Log("You completed the level!");
+                Application.Quit();
+            }
+        }
 }
