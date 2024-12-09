@@ -48,8 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keysNeeded: 1
   playerScript: {fileID: 9198368800895714100, guid: 7b2c6691ce01279458eecf447cd738dc, type: 3}
-  openDoor: {fileID: 2419939955303076571, guid: 58055206daacf894c9b80f06f6237bd7, type: 3}
-  closedDoor: {fileID: 3714034527683075651, guid: def06759546204c40b9d650cc6026f1e, type: 3}
+  openDoor: {fileID: -35171772923903766, guid: 58055206daacf894c9b80f06f6237bd7, type: 3}
+  closedDoor: {fileID: 4211092745432419961, guid: def06759546204c40b9d650cc6026f1e, type: 3}
+  openDoorRenderer: {fileID: 2419939955303076571, guid: 58055206daacf894c9b80f06f6237bd7, type: 3}
+  closedDoorRenderer: {fileID: 3714034527683075651, guid: def06759546204c40b9d650cc6026f1e, type: 3}
 --- !u!1001 &7755198759659374800
 PrefabInstance:
   m_ObjectHideFlags: 0

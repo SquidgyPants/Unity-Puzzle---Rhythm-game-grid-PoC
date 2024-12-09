@@ -118,7 +118,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.009145021, y: 0.19203627}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -129,7 +129,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.4, y: 6.4}
+  m_Size: {x: 2.7238617, y: 3.7480552}
   m_EdgeRadius: 0
 --- !u!114 &-35171772923903766
 MonoBehaviour:
@@ -144,6 +144,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keysNeeded: 1
-  playerScript: {fileID: 9198368800895714100, guid: 7b2c6691ce01279458eecf447cd738dc, type: 3}
-  openDoor: {fileID: 2419939955303076571}
-  closedDoor: {fileID: 3714034527683075651, guid: def06759546204c40b9d650cc6026f1e, type: 3}
+  playerScript: {fileID: 0}
+  openDoor: {fileID: -35171772923903766}
+  closedDoor: {fileID: 4211092745432419961, guid: def06759546204c40b9d650cc6026f1e, type: 3}
+  openDoorRenderer: {fileID: 2419939955303076571}
+  closedDoorRenderer: {fileID: 3714034527683075651, guid: def06759546204c40b9d650cc6026f1e, type: 3}
+  QuitGame:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 404882796571442019, guid: a793038470eb9b64898f91b63cd946bf, type: 3}
+        m_TargetAssemblyTypeName: Quit, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

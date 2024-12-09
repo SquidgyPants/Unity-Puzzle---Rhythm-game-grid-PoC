@@ -37,9 +37,9 @@ public class GridManager : MonoBehaviour
     {
         GenerateGrid();
         SpawnPlayer();
-        SpawnDoor();
-//        SpawnClosedDoor();
-//        SpawnOpenDoor();
+        //        SpawnDoor();
+        SpawnClosedDoor();
+        SpawnOpenDoor();
         SpawnKeys();
     }
 
@@ -76,12 +76,14 @@ public class GridManager : MonoBehaviour
         spawnedPlayer = Instantiate(playerPrefab, new Vector3(0f, 8f, 0f), Quaternion.identity);
         spawnedPlayer.name = "Player";
         spawnedPlayer.beatManager = FindObjectOfType<BeatManager>();
+        spawnedPlayer.keyCount = 0;
         spawnedPlayer.Init();
     }
 
     public void SpawnKeys()
     {
-        for (int i = 0; i < spawnDoor.keysNeeded; i++)
+        for (int i = 0; i < closedDoor.keysNeeded; i++)
+        //for (int i = 0; i < spawnDoor.keysNeeded; i++)
         {
             keyPosition = new Vector3(Random.Range(1, 15), Random.Range(1, 8), 0f);
             while (keyPosition == previousKeyPosition)
@@ -90,6 +92,7 @@ public class GridManager : MonoBehaviour
             }
             spawnedKey = Instantiate(keyPrefab, keyPosition, Quaternion.identity);
             spawnedKey.name = "Key " + (i + 1);
+            spawnedKey.playerScript = spawnedPlayer;
             spawnedKey.Init();
             previousKeyPosition = keyPosition;
         }
@@ -100,26 +103,33 @@ public class GridManager : MonoBehaviour
         spawnDoor = Instantiate(doorPrefab, new Vector3(15f, 0f, 0f), Quaternion.identity);
     //  spawnDoor.transform.parent = gridManager.transform;
         spawnDoor.name = "Door";
-//        spawnDoor.closedDoor = closedDoorPrefab;
-//        spawnDoor.openDoor = openDoorPrefab;
+        spawnDoor.playerScript = spawnedPlayer;
+        spawnDoor.closedDoor = closedDoor;
+        spawnDoor.openDoor = openDoor;
+        spawnDoor.closedDoor.playerScript = spawnedPlayer;
+        spawnDoor.openDoor.playerScript = spawnedPlayer;
         spawnDoor.Init();
     }
 
-//    public void SpawnClosedDoor()
-//    {
-//        closedDoor = Instantiate(closedDoorPrefab, new Vector3(15f, 0f, 0f), Quaternion.identity);
-////        spawnDoor.transform.parent = gridManager.transform;
-//        closedDoor.name = "Closed Door";
-//        closedDoor.playerScript = spawnedPlayer;
-//        closedDoor.Init();
-//    }
-//
-//    public void SpawnOpenDoor()
-//    {
-//        openDoor = Instantiate(openDoorPrefab, new Vector3(15f, 0f, 0f), Quaternion.identity);
-//    //  spawnDoor.transform.parent = gridManager.transform;
-//        openDoor.name = "Closed Door";
-//        openDoor.playerScript = spawnedPlayer;
-//        openDoor.Init();
-//    }
+    public void SpawnClosedDoor()
+    {
+        closedDoor = Instantiate(closedDoorPrefab, new Vector3(15f, 0f, 0f), Quaternion.identity);
+        //        spawnDoor.transform.parent = gridManager.transform;
+        closedDoor.name = "Closed Door";
+        closedDoor.playerScript = spawnedPlayer;
+        closedDoor.closedDoorRenderer = closedDoor.GetComponent<SpriteRenderer>();
+        closedDoor.Init();
+    }
+
+    public void SpawnOpenDoor()
+    {
+        openDoor = Instantiate(openDoorPrefab, new Vector3(15f, 0f, 0f), Quaternion.identity);
+        //  spawnDoor.transform.parent = gridManager.transform;
+        openDoor.name = "Closed Door";
+        openDoor.playerScript = spawnedPlayer;
+        openDoor.openDoorRenderer = openDoor.GetComponent<SpriteRenderer>();
+        openDoor.openDoorRenderer.enabled = false;
+        openDoor.closedDoorRenderer = closedDoor.GetComponent<SpriteRenderer>();
+        openDoor.Init();
+    }
 }

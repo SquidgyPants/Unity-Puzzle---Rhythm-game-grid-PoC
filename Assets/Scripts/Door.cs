@@ -1,22 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Door : MonoBehaviour
 {
     [SerializeField] public float keysNeeded;
     [SerializeField] public Player playerScript;
-    [SerializeField] private SpriteRenderer openDoor;
-    [SerializeField] private SpriteRenderer closedDoor;
+    [SerializeField] public Door openDoor;
+    [SerializeField] public Door closedDoor;
+    [SerializeField] public SpriteRenderer openDoorRenderer;
+    [SerializeField] public SpriteRenderer closedDoorRenderer;
+    [SerializeField] private UnityEvent QuitGame;
 
     private float keyCount;
     private bool doorsOpened = false;
 
     public void Init()
     {
-        closedDoor.enabled = true;
+        closedDoorRenderer.enabled = true;
     }
-    
+
     private void Update()
     {
         keyCount = playerScript.keyCount;
@@ -29,20 +33,21 @@ public class Door : MonoBehaviour
 
     public void Open()
     {
-         if (!doorsOpened)
-         {
-            closedDoor.enabled = false;
-            openDoor.enabled = true;
+        if (!doorsOpened)
+        {
+            closedDoorRenderer.enabled = false;
+            openDoorRenderer.enabled = true;
             doorsOpened = true;
-         }
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Door hit");
+        if (collision.gameObject.CompareTag("Player") && !closedDoorRenderer.enabled && openDoorRenderer.enabled)
         {
-            if (collision.gameObject.CompareTag("Player") && !closedDoor.enabled && openDoor.enabled)
-            {
-                Debug.Log("You completed the level!");
-                Application.Quit();
-            }
+            Debug.Log("You completed the level!");
+            QuitGame.Invoke();
         }
+    }
 }

@@ -7,9 +7,10 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer renderer;
     [SerializeField] private Transform playerTransform;
     [SerializeField] public BeatManager beatManager;
-    [SerializeField] public int keyCount;
+    //[SerializeField] public int keyCount;
 
     private float Offset = 0.150f;
+    public int keyCount = 0;
 
 
     public void Init()

@@ -7,7 +7,8 @@ public class Key : MonoBehaviour
 {
     [SerializeField] Collider2D keyCollider;
     [SerializeField] SpriteRenderer keySprite;
-    [SerializeField] UnityEvent keyPickup;
+    //[SerializeField] UnityEvent keyPickup;
+    [SerializeField] public Player playerScript;
 
     public void Init()
     {
@@ -26,7 +27,7 @@ public class Key : MonoBehaviour
             Debug.Log("You picked up a key!");
             keySprite.enabled = false;
             keyCollider.enabled = false;
-            keyPickup.Invoke();
+            playerScript.KeyPickedUp();
         }
     }
 }
