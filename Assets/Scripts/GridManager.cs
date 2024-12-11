@@ -9,26 +9,23 @@ public class GridManager : MonoBehaviour
 {
     [SerializeField] private int width, height;
     [SerializeField] private Tile tilePrefab;
-    //[SerializeField] private GameObject gridManager;
     [SerializeField] private Transform camera;
     [SerializeField] private Player playerPrefab;
     [SerializeField] private Key keyPrefab;
-    [SerializeField] private Door doorPrefab;
     [SerializeField] private Door openDoorPrefab;
     [SerializeField] private Door closedDoorPrefab;
-
-//    [SerializeField] private UnityEvent generateGrid;
-//    [SerializeField] private UnityEvent startSong;
+    [SerializeField] private Ghost ghostPrefab;
+    [SerializeField] private BeatManager beatManager;
 
     private Vector3 keyPosition;
     private Vector3 previousKeyPosition;
-    private float elapsedTime;
-    private bool songStarted = false;
+    private bool ghostSpawned = false;
     Door closedDoor;
     Door openDoor;
-    Door spawnDoor;
     Key spawnedKey;
     Player spawnedPlayer;
+    Ghost spawnedGhost;
+
 
 
 
@@ -37,20 +34,19 @@ public class GridManager : MonoBehaviour
     {
         GenerateGrid();
         SpawnPlayer();
-        //        SpawnDoor();
         SpawnClosedDoor();
         SpawnOpenDoor();
         SpawnKeys();
+
     }
 
     void Update()
     {
-//        elapsedTime += Time.deltaTime;
-//        if (elapsedTime >= 2f && !songStarted)
-//        {
-//            startSong.Invoke();
-//            songStarted = true;
-//        }
+    if (beatManager.songPosInBeats >= 2 && !ghostSpawned)
+        {
+            SpawnGhost();
+            ghostSpawned = true;
+        }
     }
 
     public void GenerateGrid()
@@ -83,7 +79,6 @@ public class GridManager : MonoBehaviour
     public void SpawnKeys()
     {
         for (int i = 0; i < closedDoor.keysNeeded; i++)
-        //for (int i = 0; i < spawnDoor.keysNeeded; i++)
         {
             keyPosition = new Vector3(Random.Range(1, 15), Random.Range(1, 8), 0f);
             while (keyPosition == previousKeyPosition)
@@ -98,23 +93,9 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void SpawnDoor()
-    {
-        spawnDoor = Instantiate(doorPrefab, new Vector3(15f, 0f, 0f), Quaternion.identity);
-    //  spawnDoor.transform.parent = gridManager.transform;
-        spawnDoor.name = "Door";
-        spawnDoor.playerScript = spawnedPlayer;
-        spawnDoor.closedDoor = closedDoor;
-        spawnDoor.openDoor = openDoor;
-        spawnDoor.closedDoor.playerScript = spawnedPlayer;
-        spawnDoor.openDoor.playerScript = spawnedPlayer;
-        spawnDoor.Init();
-    }
-
     public void SpawnClosedDoor()
     {
         closedDoor = Instantiate(closedDoorPrefab, new Vector3(15f, 0f, 0f), Quaternion.identity);
-        //        spawnDoor.transform.parent = gridManager.transform;
         closedDoor.name = "Closed Door";
         closedDoor.playerScript = spawnedPlayer;
         closedDoor.closedDoorRenderer = closedDoor.GetComponent<SpriteRenderer>();
@@ -124,7 +105,6 @@ public class GridManager : MonoBehaviour
     public void SpawnOpenDoor()
     {
         openDoor = Instantiate(openDoorPrefab, new Vector3(15f, 0f, 0f), Quaternion.identity);
-        //  spawnDoor.transform.parent = gridManager.transform;
         openDoor.name = "Closed Door";
         openDoor.playerScript = spawnedPlayer;
         openDoor.openDoorRenderer = openDoor.GetComponent<SpriteRenderer>();
@@ -132,4 +112,14 @@ public class GridManager : MonoBehaviour
         openDoor.closedDoorRenderer = closedDoor.GetComponent<SpriteRenderer>();
         openDoor.Init();
     }
+
+    public void SpawnGhost()
+    {
+        spawnedGhost = Instantiate(ghostPrefab, new Vector3(0f, 8f, 0f), Quaternion.identity);
+        spawnedGhost.name = "Ghost";
+        spawnedGhost.playerTransform = spawnedPlayer.GetComponent<Transform>();
+        spawnedGhost.ghostTransform = spawnedGhost.GetComponent<Transform>();
+        spawnedGhost.followDistance = 3;
+    }
+
 }

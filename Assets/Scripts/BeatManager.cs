@@ -8,12 +8,6 @@ public class BeatManager : MonoBehaviour
 {
     [SerializeField] private float bpm;
     [SerializeField] private AudioSource song;
-    [SerializeField] public TextMeshProUGUI countdown;
-
-    //keep all the position-in-beats of notes in the song
-    [SerializeField] float[] notes;
-    //the index of the next note to be spawned
-    [SerializeField] int nextIndex = 0;
 
     //the current position of the song (in seconds)
     public float songPosition,
@@ -21,7 +15,6 @@ public class BeatManager : MonoBehaviour
         songPosInBeats = 0,
         //the duration of a beat
         secPerBeat,
-        //how many ticks have passed since the song started
         dsptimesong,
         nextBeatHit,
         prevBeatHit,
@@ -29,10 +22,8 @@ public class BeatManager : MonoBehaviour
 
     bool isReady = false;
     bool hadStarted = false;
-    bool hasBeatTriggered = false;
     private float elapsedTime = 0f;
     private float songOffset = 0.284f;
-    private bool songStarted = false;
 
 
     // Start is called before the first frame update
@@ -67,29 +58,11 @@ public class BeatManager : MonoBehaviour
                 songPosition = 0;
                 songPosInBeats = 0;
             }
-//            Debug.Log(songPosition);
             songPosInBeats = songPosition / secPerBeat;
-            //Debug.Log($"songPosInBeats: {songPosInBeats}");
             prevBeatHit = songPosInBeats % 1;
             nextBeatHit = 1 - prevBeatHit;
         }
     }
-
-    public void StartSong()
-    {
-        if (song != null)
-        {
-            //dsptimesong = (float)AudioSettings.dspTime;
-            //song.PlayOneShot(clip);
-        }
-    }
-
-
-
-
-
-
-
 
 
 

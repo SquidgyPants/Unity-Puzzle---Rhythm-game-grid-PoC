@@ -40,7 +40,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4573655465166891195}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -103,3 +103,6 @@ MonoBehaviour:
   closedDoor: {fileID: -35171772923903766, guid: 58055206daacf894c9b80f06f6237bd7, type: 3}
   openDoorRenderer: {fileID: 2419939955303076571, guid: 58055206daacf894c9b80f06f6237bd7, type: 3}
   closedDoorRenderer: {fileID: 3714034527683075651}
+  QuitGame:
+    m_PersistentCalls:
+      m_Calls: []

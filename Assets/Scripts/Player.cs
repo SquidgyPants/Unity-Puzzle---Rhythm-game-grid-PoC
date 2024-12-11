@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer renderer;
     [SerializeField] private Transform playerTransform;
     [SerializeField] public BeatManager beatManager;
-    //[SerializeField] public int keyCount;
 
     private float Offset = 0.150f;
     public int keyCount = 0;
@@ -23,7 +22,7 @@ public class Player : MonoBehaviour
         MovePlayer();
     }
 
-    public void MovePlayer(/*float prevBeatHit, float nextBeatHit*/)
+    public void MovePlayer()
     {
         if (beatManager.songPosInBeats % 1 < Offset || 1 - (beatManager.songPosInBeats % 1) < Offset)
         {
