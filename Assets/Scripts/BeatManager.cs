@@ -2,13 +2,17 @@ using System;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class BeatManager : MonoBehaviour
 {
     [SerializeField] private float bpm;
     [SerializeField] private AudioSource song;
+    [SerializeField] public Ghost ghostObject;
+    [SerializeField] public UnityEvent moveGhost;
 
+    public event Action<int> trigger;
     //the current position of the song (in seconds)
     public float songPosition,
         //the current position of the song (in beats)
@@ -22,8 +26,10 @@ public class BeatManager : MonoBehaviour
 
     bool isReady = false;
     bool hadStarted = false;
+    bool hasBeatTriggered = false;
     private float elapsedTime = 0f;
     private float songOffset = 0.284f;
+    public int beatCounter = 0;
 
 
     // Start is called before the first frame update
@@ -61,6 +67,19 @@ public class BeatManager : MonoBehaviour
             songPosInBeats = songPosition / secPerBeat;
             prevBeatHit = songPosInBeats % 1;
             nextBeatHit = 1 - prevBeatHit;
+
+            if (prevBeatHit < 0.025f || nextBeatHit < 0.025f)
+            {
+                if (!hasBeatTriggered)
+                {
+                    hasBeatTriggered = true;
+                    moveGhost.Invoke();
+                }
+            }
+            else
+            {
+                hasBeatTriggered = false;
+            }
         }
     }
 

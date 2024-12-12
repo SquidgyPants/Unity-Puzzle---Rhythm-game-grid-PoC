@@ -26,6 +26,8 @@ public class GridManager : MonoBehaviour
     Player spawnedPlayer;
     Ghost spawnedGhost;
 
+    public static object Instance { get; internal set; }
+
 
 
 
@@ -37,14 +39,15 @@ public class GridManager : MonoBehaviour
         SpawnClosedDoor();
         SpawnOpenDoor();
         SpawnKeys();
-
     }
 
     void Update()
     {
-    if (beatManager.songPosInBeats >= 2 && !ghostSpawned)
+    if (!ghostSpawned && spawnedPlayer.playerMoveCount == 3)
         {
             SpawnGhost();
+            beatManager.ghostObject = spawnedGhost;
+            beatManager.moveGhost.AddListener(beatManager.ghostObject.MoveGhost);
             ghostSpawned = true;
         }
     }
@@ -119,6 +122,7 @@ public class GridManager : MonoBehaviour
         spawnedGhost.name = "Ghost";
         spawnedGhost.playerTransform = spawnedPlayer.GetComponent<Transform>();
         spawnedGhost.ghostTransform = spawnedGhost.GetComponent<Transform>();
+        spawnedGhost.playerObject = spawnedPlayer;
         spawnedGhost.followDistance = 3;
     }
 

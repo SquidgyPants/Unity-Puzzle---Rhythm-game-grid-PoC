@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
     [SerializeField] public BeatManager beatManager;
 
     private float Offset = 0.150f;
+    public List<Vector3> playerPositions = new List<Vector3>();
     public int keyCount = 0;
+    public int playerMoveCount = 0;
 
 
     public void Init()
@@ -29,18 +31,26 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W) && playerTransform.position.y < 8)
             {
                 playerTransform.Translate(0f, 1f, 0);
+                playerMoveCount ++;
+                playerPositions.Add(playerTransform.position);
             }
             if (Input.GetKeyDown(KeyCode.A) && playerTransform.position.x > 0)
             {
                 playerTransform.Translate(-1f, 0f, 0);
+                playerMoveCount++;
+                playerPositions.Add(playerTransform.position);
             }
             if (Input.GetKeyDown(KeyCode.S) && playerTransform.position.y > 0)
             {
                 playerTransform.Translate(0f, -1f, 0);
+                playerMoveCount++;
+                playerPositions.Add(playerTransform.position);
             }
             if (Input.GetKeyDown(KeyCode.D) && playerTransform.position.x < 15)
             {
                 playerTransform.Translate(1f, 0f, 0);
+                playerMoveCount++;
+                playerPositions.Add(playerTransform.position);
             }
         }
     }

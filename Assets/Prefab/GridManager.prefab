@@ -52,9 +52,10 @@ MonoBehaviour:
   camera: {fileID: 0}
   playerPrefab: {fileID: 9198368800895714100, guid: 7b2c6691ce01279458eecf447cd738dc, type: 3}
   keyPrefab: {fileID: -3608539198033220468, guid: 1acf55485cb3bc940a520a32d51e9f3e, type: 3}
-  doorPrefab: {fileID: 8683458272219968410, guid: 7e7675d90569a294ba20aa9f84a37790, type: 3}
   openDoorPrefab: {fileID: -35171772923903766, guid: 58055206daacf894c9b80f06f6237bd7, type: 3}
   closedDoorPrefab: {fileID: 4211092745432419961, guid: def06759546204c40b9d650cc6026f1e, type: 3}
+  ghostPrefab: {fileID: -8154208298871255106, guid: be7f50d891089314c9baeda9dac5327d, type: 3}
+  beatManager: {fileID: 0}
 --- !u!114 &452706853547898237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,9 +70,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bpm: 120
   song: {fileID: 569459356475354619}
-  countdown: {fileID: 0}
-  notes: []
-  nextIndex: 0
+  ghostObject: {fileID: 0}
+  moveGhost:
+    m_PersistentCalls:
+      m_Calls: []
   songPosition: 0
   songPosInBeats: 0
   secPerBeat: 0
