@@ -45,7 +45,7 @@ public class GridManager : MonoBehaviour
     {
     if (!ghostSpawned && spawnedPlayer.playerMoveCount == 3)
         {
-            SpawnGhost();
+//            SpawnGhost();
             beatManager.ghostObject = spawnedGhost;
             beatManager.moveGhost.AddListener(beatManager.ghostObject.MoveGhost);
             ghostSpawned = true;

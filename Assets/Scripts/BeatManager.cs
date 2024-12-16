@@ -72,8 +72,9 @@ public class BeatManager : MonoBehaviour
             {
                 if (!hasBeatTriggered)
                 {
-                    hasBeatTriggered = true;
-                    moveGhost.Invoke();
+//                    beatCounter++;
+//                    trigger.Invoke(beatCounter);
+//                    hasBeatTriggered = true;
                 }
             }
             else
